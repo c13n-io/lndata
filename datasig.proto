@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option go_package = "github.com/c13n-io/lndata";
+
+message DataSig {
+        uint32 version = 1;
+        bytes sig = 2;
+        bytes senderPK = 3;
+}
+
