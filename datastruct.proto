@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/c31n-io/lndata";
+option go_package = "github.com/c13n-io/lndata";
 
 message FragmentInfo {
         uint64 fragset_id = 1;
