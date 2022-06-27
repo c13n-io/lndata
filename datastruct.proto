@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/c31n-io/lndata";
+
+message FragmentInfo {
+        uint64 fragset_id = 1;
+        uint32 total_size = 2;
+        uint32 offset = 3;
+}
+
+message DataStruct {
+        uint32 version = 1;
+        bytes payload = 2;
+        optional FragmentInfo fragment = 3;
+}
+
