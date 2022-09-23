@@ -1,0 +1,22 @@
+name: lndata main pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release-build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - uses: pmorelli92/github-container-registry-build-push@2.0.0
+        name: Build and Publish lndata-build-env:latest
+        with:
+          github-push-secret: ${{secrets.GITHUB_TOKEN}}
+          docker-image-name: lndata-build-env
+          docker-image-tag: latest
+          dockerfile-path: ./docker/build/Dockerfile
+          build-context: ./docker/build
