@@ -14,4 +14,4 @@ RUN mkdir /build
 
 WORKDIR /build
 
-CMD ["/bin/sh"]
+ENTRYPOINT [ "/build/build_lndata.sh" ]

@@ -20,3 +20,36 @@ jobs:
           docker-image-tag: latest
           dockerfile-path: ./docker/build/Dockerfile
           build-context: ./docker/build
+
+  update-lndata-go:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.repository_owner}}
+          password: ${{secrets.GHCR_TOKEN}}
+
+      - name: Build *pb.go
+        uses: addnab/docker-run-action@v3
+        with:
+          username: ${{github.repository_owner}}
+          password: ${{secrets.GHCR_TOKEN}}
+          registry: ghcr.io
+          image: ghcr.io/c13n-io/lndata-build-env:latest
+          options: -v ${{ github.workspace }}:/build
+          run: |
+            echo "Running Script"
+            /build/build_lndata.sh
+
+      - name: Update lndata-go repository
+        uses: cpina/github-action-push-to-another-repository@v1.4.2
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'artifacts/go'
+          destination-github-username: 'c13n-io'
+          destination-repository-name: 'lndata-go'
+          user-email: c13n-lndata-go-deployment@c13n.io
+          target-branch: master
