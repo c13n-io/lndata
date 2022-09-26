@@ -13,5 +13,3 @@ RUN apk add --no-cache --update alpine-sdk~=1.0 \
 RUN mkdir /build
 
 WORKDIR /build
-
-ENTRYPOINT [ "/build/build_lndata.sh" ]

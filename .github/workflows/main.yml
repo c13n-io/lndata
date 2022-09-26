@@ -41,7 +41,7 @@ jobs:
           options: -v ${{ github.workspace }}:/build
           run: |
             echo "Running Script"
-            /build/build_lndata.sh
+            ./build_lndata.sh
 
       - name: Update lndata-go repository
         uses: cpina/github-action-push-to-another-repository@v1.4.2
