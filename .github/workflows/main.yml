@@ -23,6 +23,7 @@ jobs:
 
   update-lndata-go:
     runs-on: ubuntu-latest
+    needs: ["release-build-docker-image"]
     steps:
       - name: Login to GitHub Packages Docker Registry
         uses: docker/login-action@v1
@@ -41,6 +42,9 @@ jobs:
           options: -v ${{ github.workspace }}:/build
           run: |
             echo "Running Script"
+            pwd
+            ls -lh
+            ls -lh /build
             ./build_lndata.sh
 
       - name: Update lndata-go repository
