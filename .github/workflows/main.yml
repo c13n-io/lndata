@@ -32,6 +32,9 @@ jobs:
           username: ${{github.repository_owner}}
           password: ${{secrets.GHCR_TOKEN}}
 
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
       - name: Build *pb.go
         uses: addnab/docker-run-action@v3
         with:
